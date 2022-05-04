@@ -18,7 +18,7 @@ exports.createTicket = async (req, res) => {
         description: req.body.description,
         ticketPriority: req.body.ticketPriority,
         reporter: req.userId,
-        status: req.body.status
+        // status: req.body.status
     }
     // if any engineer is available
     try {
@@ -146,7 +146,7 @@ exports.updateTicket = async (req, res) => {
             message: "Only owner of ticket/engineer assigned/admin is allowed to update the ticket"
         })
     }
-    // update the attributes of saved tickets
+    // update the attributes of saved tickets  
     ticket.title = req.body.title != undefined ? req.body.title : ticket.title;
 
     ticket.description = req.body.description != undefined ? req.body.description : ticket.description;
@@ -163,6 +163,12 @@ exports.updateTicket = async (req, res) => {
     // save the changed ticket
     const updatedTicket = await ticket.save();
 
+    //
+    notificationServiceClient(ticket._id, "Updated new ticket: "+ticket._id, ticket.description, user.email+","+engineer.email, user.email);
+
+
+
+    
     // return the updated ticket
     return res.status(200).send(objectConverter.ticketResponse(updatedTicket));
 }

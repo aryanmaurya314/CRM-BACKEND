@@ -7,6 +7,8 @@ const Client = require("node-rest-client").Client;
 
 const client = new Client();
 
+exports.client = client;
+
 /**
  * Expose a function which will take the following information
  * 
