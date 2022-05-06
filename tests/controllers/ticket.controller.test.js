@@ -11,10 +11,13 @@ const client = require("../../utils/notificationServiceClient").client;
 const ticketRequestBody = {
     title: "Test",
     ticketPriority: 4,
-    description: "Test"
+    description: "Test",
+    reporter: 1
 }
+
+
 const createdTicketBody = {
-    _id: "12dasfa",
+    _id: "12dasfa56y",
     title: "Test",
     ticketPriority: 4,
     description: "Test",
@@ -30,7 +33,7 @@ const savedUserObj = {
     userId: 1,
     email: "test@relevel.com",
     password: "test123",
-    userType: "CUSTOMER",
+    userType: "ADMIN",
     ticketsCreated: [],
     ticketsAssigned: [],
     save: jest.fn()    // mock it
@@ -73,5 +76,5 @@ describe("Testing create ticket feature", () => {
         expect(ticketSpy).toHaveBeenCalled();
         expect(clientSpy).toHaveBeenCalled();
 
-    })
-})
+    });
+});
